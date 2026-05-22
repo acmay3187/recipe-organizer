@@ -1,0 +1,200 @@
+[
+  {
+    "name": "Chicken Stir-Fry",
+    "url": "https://www.foodnetwork.com/recipes/food-network-kitchen/chicken-stir-fry-12853113",
+    "source": "Food Network Kitchen",
+    "cuisine": "Asian",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Chicken with broccoli, mushrooms, and carrots in a savory soy-sesame sauce. Serve over brown rice.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Magnesium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "url": "https://www.wellplated.com/chicken-fried-rice/",
+    "source": "Well Plated by Erin",
+    "cuisine": "Asian",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "One-skillet meal with chicken, eggs, brown rice, bell peppers, and broccoli. Use cold/leftover brown rice for best results.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin D", "Vitamin B12", "Zinc", "Selenium", "Lots of vegetables"]
+  },
+  {
+    "name": "Egg Fried Rice with Edamame",
+    "url": "https://www.wellplated.com/homemade-fried-rice/",
+    "source": "Well Plated by Erin",
+    "cuisine": "Asian",
+    "protein": "eggs",
+    "dietaryTags": ["vegetarian"],
+    "timeMinutes": 15,
+    "notes": "Meatless. Eggs + edamame over brown rice with bell peppers, peas, and carrots. The fastest dinner on the list.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin D", "Vitamin B12", "Calcium", "Myo-inositol", "Lots of vegetables"]
+  },
+  {
+    "name": "20-Minute Tofu Stir-Fry",
+    "url": "https://minimalistbaker.com/20-minute-tofu-stir-fry/",
+    "source": "Minimalist Baker",
+    "cuisine": "Asian",
+    "protein": "tofu",
+    "dietaryTags": ["vegetarian", "vegan"],
+    "timeMinutes": 20,
+    "notes": "Fully plant-based. Tofu with colorful veggies in a savory sauce over brown rice or quinoa. Omit any avocado garnish.",
+    "nutrients": ["Protein", "Complex carbs", "Calcium", "Magnesium", "Zinc", "Vitamin C", "Myo-inositol", "Lots of vegetables"]
+  },
+  {
+    "name": "Thai Peanut Noodles with Chicken",
+    "url": "https://www.platingsandpairings.com/20-minute-sesame-chicken-noodle-bowls/",
+    "source": "Platings and Pairings",
+    "cuisine": "Asian",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 20,
+    "notes": "Poached chicken with noodles in a creamy sesame-peanut sauce with red cabbage. Bold flavors. Sub tofu for plant-based version.",
+    "nutrients": ["Protein", "Vitamin E", "Vitamin C", "Magnesium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Thai Red Curry with Tofu",
+    "url": "https://cookieandkate.com/thai-red-curry-recipe/",
+    "source": "Cookie and Kate",
+    "cuisine": "Asian",
+    "protein": "tofu",
+    "dietaryTags": ["vegetarian", "vegan"],
+    "timeMinutes": 30,
+    "notes": "Fragrant red curry paste with coconut milk, vegetables, and baked tofu. Serve over brown rice. Use Thai Kitchen red curry paste (vegetarian-friendly). A completely different flavor profile from tikka masala.",
+    "nutrients": ["Protein", "Complex carbs", "Calcium", "Magnesium", "Vitamin C", "Unsaturated fats", "Anti-inflammatory spices", "Lots of vegetables"]
+  },
+  {
+    "name": "Easy Chicken Fajitas",
+    "url": "https://www.spendwithpennies.com/easy-chicken-fajitas/",
+    "source": "Spend With Pennies",
+    "cuisine": "Tex-Mex / Mexican",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 20,
+    "notes": "Chicken breast with bell peppers and onions in homemade seasoning. Serve with corn tortillas. Skip avocado/guacamole. Kids love assembling their own!",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Ground Turkey Sweet Potato Skillet",
+    "url": "https://realfoodwholelife.com/recipes/ground-turkey-sweet-potato-skillet/",
+    "source": "Real Food Whole Life",
+    "cuisine": "Tex-Mex / Mexican",
+    "protein": "turkey",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Southwest-spiced ground turkey with sweet potatoes, peppers, and onions. One-pan. Skip bean variation. Skip avocado topping. Great leftovers for lunch.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Lots of vegetables"]
+  },
+  {
+    "name": "Crispy Baked Chicken Tacos",
+    "url": "https://natashaskitchen.com/baked-chicken-tacos/",
+    "source": "Natasha's Kitchen",
+    "cuisine": "Tex-Mex / Mexican",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Shredded rotisserie chicken with taco seasoning, loaded into corn tortillas with cheese and baked until crispy. Top with lettuce, tomato, salsa (no avocado).",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin B12", "Calcium", "Zinc", "Selenium", "Lots of vegetables"]
+  },
+  {
+    "name": "Tofu Tacos",
+    "url": "https://www.acouplecooks.com/tofu-tacos/",
+    "source": "A Couple Cooks",
+    "cuisine": "Tex-Mex / Mexican",
+    "protein": "tofu",
+    "dietaryTags": ["vegetarian", "vegan"],
+    "timeMinutes": 20,
+    "notes": "Crumbled, spiced tofu cooked in a skillet — tastes remarkably like taco meat. Serve in corn tortillas with lettuce, tomato, and salsa. No beans needed in this recipe.",
+    "nutrients": ["Protein", "Complex carbs", "Calcium", "Zinc", "Magnesium", "Vitamin C", "Unsaturated fats"]
+  },
+  {
+    "name": "Shakshuka",
+    "url": "https://www.loveandlemons.com/shakshuka-recipe/",
+    "source": "Love and Lemons",
+    "cuisine": "Middle Eastern",
+    "protein": "eggs",
+    "dietaryTags": ["vegetarian"],
+    "timeMinutes": 30,
+    "notes": "Eggs poached in a spiced tomato and bell pepper sauce. Serve with whole grain pita or crusty bread for dipping. Great \"breakfast for dinner\" alternative to frittata, with bolder North African/Middle Eastern spicing.",
+    "nutrients": ["Protein", "Folic acid", "Vitamin D", "Vitamin B12", "Vitamin C", "Vitamin E", "Magnesium", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Spinach Frittata",
+    "url": "https://www.thekitchn.com/spinach-frittata-recipe-23173248",
+    "source": "The Kitchn",
+    "cuisine": "Italian / American",
+    "protein": "eggs",
+    "dietaryTags": ["vegetarian"],
+    "timeMinutes": 30,
+    "notes": "Egg-based dinner with loads of spinach, cheddar, and Parmesan. Serve with a simple salad or whole grain bread. Great \"breakfast for dinner.\"",
+    "nutrients": ["Protein", "Folic acid", "Vitamin D", "Vitamin B12", "Calcium", "Vitamin E", "Vitamin C", "Magnesium", "Unsaturated fats"]
+  },
+  {
+    "name": "Turkey Meatballs with Marinara & Zucchini Noodles",
+    "url": "https://bakerbynature.com/baked-turkey-zucchini-meatballs/",
+    "source": "Baker by Nature",
+    "cuisine": "Italian / American",
+    "protein": "turkey",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Baked turkey meatballs with homemade marinara and zucchini noodles (or regular pasta). A lighter Italian comfort food night with a different poultry. Kid-friendly.",
+    "nutrients": ["Protein", "Vitamin C", "Vitamin B12", "Vitamin D", "Zinc", "Selenium", "Magnesium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Chicken Pasta Primavera",
+    "url": "https://www.budgetbytes.com/chicken-pasta-primavera/",
+    "source": "Budget Bytes",
+    "cuisine": "Italian / American",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Chicken breast with asparagus, peas, and a light cream sauce over pasta. Use whole wheat pasta for more fiber.",
+    "nutrients": ["Protein", "Folic acid", "Vitamin C", "Vitamin B12", "Calcium", "Zinc", "Selenium", "Lots of vegetables"]
+  },
+  {
+    "name": "Sheet Pan Lemon Chicken with Rainbow Vegetables",
+    "url": "https://www.wellplated.com/sheet-pan-chicken-rainbow-vegetables/",
+    "source": "Well Plated by Erin",
+    "cuisine": "Italian / American",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Chicken breasts with sweet potatoes, broccoli, and bell peppers in a lemon-Parmesan glaze. One pan, minimal cleanup. Serve as-is or over brown rice.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Magnesium", "Calcium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Chicken Tikka Masala",
+    "url": "https://damndelicious.net/2019/02/08/easy-chicken-tikka-masala/",
+    "source": "Damn Delicious",
+    "cuisine": "Indian",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Restaurant-quality aromatic tomato-cream curry. Serve over basmati or brown rice, or with naan. Mild spice level — great for kids. Sub coconut milk for dairy-free.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Calcium", "Unsaturated fats", "Anti-inflammatory spices"]
+  },
+  {
+    "name": "Greek Turkey Meatballs with Tzatziki",
+    "url": "https://www.skinnytaste.com/greek-turkey-meatballs/",
+    "source": "Skinnytaste",
+    "cuisine": "Mediterranean / Greek",
+    "protein": "turkey",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Herb-packed turkey meatballs with grated zucchini, served over brown rice or quinoa with tzatziki sauce. A lighter, Mediterranean spin on meatballs — different protein and flavor profile from the Italian version.",
+    "nutrients": ["Protein", "Complex carbs", "Myo-inositol", "Vitamin C", "Vitamin B12", "Vitamin D", "Calcium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Greek Chicken Bowls",
+    "url": "https://www.acouplecooks.com/greek-chicken-bowls/",
+    "source": "A Couple Cooks",
+    "cuisine": "Mediterranean / Greek",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 30,
+    "notes": "Greek-marinated chicken over turmeric rice (or quinoa) with cucumber, tomatoes, red onion, feta, and homemade tzatziki. No marinade time needed. Skip chickpea variation and avocado.",
+    "nutrients": ["Protein", "Complex carbs", "Myo-inositol", "Vitamin C", "Vitamin B12", "Calcium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  }
+]

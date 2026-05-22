@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fertility Diet Recipes</title>
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <h1 class="site-title">Fertility Diet Recipes</h1>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link nav-link--active">Recipes</a>
+        <a href="guidelines.html" class="nav-link">Guidelines</a>
+        <a href="add.html" id="add-recipe-link" class="nav-link nav-link--cta" hidden>+ Add recipe</a>
+      </nav>
+      <div class="auth-controls">
+        <span id="user-label" class="user-label" hidden></span>
+        <button type="button" id="sign-in-btn" class="btn btn--secondary">Sign in</button>
+        <button type="button" id="sign-out-btn" class="btn btn--ghost" hidden>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button type="button" id="filters-toggle" class="btn btn--secondary filters-toggle">Filters</button>
+    <input
+      type="search"
+      id="search-input"
+      class="search-input"
+      placeholder="Search recipes, notes, nutrients…"
+      aria-label="Search recipes"
+    >
+    <label class="sort-label">
+      <span>Sort:</span>
+      <select id="sort-select" class="sort-select">
+        <option value="name">Name (A→Z)</option>
+        <option value="time">Time (fastest first)</option>
+        <option value="newest">Newest first</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="layout">
+    <div id="sidebar-backdrop" class="backdrop"></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Filters">
+      <div class="sidebar__header">
+        <h2>Filters</h2>
+        <button type="button" id="close-filters" class="icon-btn" aria-label="Close filters">×</button>
+      </div>
+
+      <section class="filter-group">
+        <h3 class="filter-group__title">Cuisine</h3>
+        <div id="cuisine-chips" class="chip-row"></div>
+      </section>
+
+      <section class="filter-group">
+        <h3 class="filter-group__title">Main ingredient / diet</h3>
+        <div id="ingredient-chips" class="chip-row"></div>
+      </section>
+
+      <section class="filter-group">
+        <h3 class="filter-group__title">
+          Nutrients
+          <label class="nutrient-mode-label">
+            <select id="nutrient-mode" class="nutrient-mode">
+              <option value="all">Must have ALL</option>
+              <option value="any">Has ANY</option>
+            </select>
+          </label>
+        </h3>
+        <div id="nutrient-chips" class="chip-row"></div>
+      </section>
+
+      <button type="button" id="clear-filters" class="btn btn--ghost">Clear all filters</button>
+    </aside>
+
+    <main class="main">
+      <div id="results-count" class="results-count" aria-live="polite"></div>
+      <div id="recipe-grid" class="recipe-grid"></div>
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

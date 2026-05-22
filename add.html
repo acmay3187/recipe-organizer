@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Recipe — Fertility Diet Recipes</title>
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <h1 class="site-title">Fertility Diet Recipes</h1>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link">Recipes</a>
+        <a href="guidelines.html" class="nav-link">Guidelines</a>
+        <a href="add.html" class="nav-link nav-link--active">Add recipe</a>
+      </nav>
+      <div class="auth-controls">
+        <span id="user-label" class="user-label" hidden></span>
+        <button type="button" id="sign-in-btn" class="btn btn--secondary">Sign in</button>
+        <button type="button" id="sign-out-btn" class="btn btn--ghost" hidden>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="form-page">
+    <h2 id="page-title">Add Recipe</h2>
+
+    <div id="not-signed-in" class="callout" hidden>
+      <p>You need to sign in (and be the owner) to add or edit recipes. Click <strong>Sign in</strong> above.</p>
+    </div>
+
+    <section id="form-section" hidden>
+      <div id="seed-wrap" class="callout" hidden>
+        <h3>Initial seed</h3>
+        <p id="seed-status">Checking the collection…</p>
+        <button type="button" id="seed-btn" class="btn btn--primary">Seed initial recipes</button>
+      </div>
+
+      <form id="recipe-form" class="recipe-form" novalidate>
+        <div class="form-row">
+          <label for="recipe-name">Name <span class="required">*</span></label>
+          <input id="recipe-name" name="name" type="text" required>
+        </div>
+
+        <div class="form-row">
+          <label for="recipe-url">Source URL <span class="required">*</span></label>
+          <input id="recipe-url" name="url" type="url" placeholder="https://…" required>
+        </div>
+
+        <div class="form-row">
+          <label for="recipe-source">Source name</label>
+          <input id="recipe-source" name="source" type="text" placeholder="e.g. Cookie and Kate">
+        </div>
+
+        <div class="form-row">
+          <label for="cuisine-select">Cuisine <span class="required">*</span></label>
+          <select id="cuisine-select" name="cuisine" required></select>
+          <div id="cuisine-other-wrap" class="form-row__sub" hidden>
+            <input id="cuisine-other" name="cuisineOther" type="text" placeholder="Other cuisine">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label">Main protein</span>
+          <div id="protein-radios" class="radio-row"></div>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label">Dietary tags</span>
+          <div id="dietary-checks" class="check-row"></div>
+        </div>
+
+        <div class="form-row">
+          <label for="recipe-time">Time (minutes)</label>
+          <input id="recipe-time" name="timeMinutes" type="number" min="1" max="999">
+        </div>
+
+        <div class="form-row">
+          <label for="recipe-notes">Notes</label>
+          <textarea id="recipe-notes" name="notes" rows="4" placeholder="Short description, substitutions, family notes…"></textarea>
+        </div>
+
+        <div class="form-row">
+          <span class="form-label">Nutrients covered</span>
+          <div id="nutrient-chips" class="chip-row chip-row--form"></div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn--primary">Add recipe</button>
+          <a href="index.html" class="btn btn--ghost">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="js/add-form.js"></script>
+</body>
+</html>
