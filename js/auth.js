@@ -1,5 +1,7 @@
 import {
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
@@ -8,6 +10,11 @@ import { OWNER_EMAIL } from "./firebase-config.js";
 
 const subscribers = new Set();
 let currentState = { user: null, isOwner: false };
+
+// Complete any redirect-based sign-in that was in flight before this page loaded.
+getRedirectResult(auth).catch((err) => {
+  console.error("Redirect sign-in failed:", err);
+});
 
 onAuthStateChanged(auth, (user) => {
   currentState = {
@@ -27,10 +34,30 @@ export function getAuthState() {
   return currentState;
 }
 
+// Try popup first (better UX on desktop), fall back to redirect when the popup
+// is blocked / unsupported (mobile browsers, strict popup blockers, in-app browsers).
+const REDIRECT_FALLBACK_CODES = new Set([
+  "auth/popup-blocked",
+  "auth/popup-closed-by-user",
+  "auth/cancelled-popup-request",
+  "auth/operation-not-supported-in-this-environment",
+  "auth/web-storage-unsupported"
+]);
+
 export async function signIn() {
   try {
     await signInWithPopup(auth, googleProvider);
   } catch (err) {
+    if (REDIRECT_FALLBACK_CODES.has(err.code)) {
+      try {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      } catch (redirectErr) {
+        console.error("Redirect sign-in failed:", redirectErr);
+        alert("Sign-in failed: " + (redirectErr.message || redirectErr.code));
+        return;
+      }
+    }
     console.error("Sign-in failed:", err);
     alert("Sign-in failed: " + (err.message || err.code));
   }
