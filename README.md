@@ -1,12 +1,3 @@
-# Fertility Diet Recipes
-
-A personal recipe organizer for weeknight dinners that fit Natalie Crawford's *The Fertility Formula* guidelines.
-
-- Vanilla HTML/CSS/JS — no build tools, no framework
-- **Firebase Firestore** for cross-device sync (laptop ↔ phone)
-- **Google sign-in** with email allowlist gates writes (only you can add/edit/delete)
-- Hosted free on **GitHub Pages**
-
 ## Pages
 
 - `index.html` — recipe grid with sidebar filters (cuisine, main ingredient/diet, nutrients) and search
