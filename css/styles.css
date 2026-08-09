@@ -386,6 +386,24 @@ h1, h2, h3, h4 { font-family: Georgia, "Times New Roman", serif; color: #1f1f1f;
 }
 .callout h3 { margin-top: 0; }
 
+/* Was previously scoped to .prose only; the import panel needs it too. */
+.muted { color: var(--text-muted); }
+
+.import-list {
+  margin: 8px 0 12px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.import-list li { line-height: 1.4; }
+
+.import-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .recipe-form {
   background: var(--surface);
   border: 1px solid var(--border);

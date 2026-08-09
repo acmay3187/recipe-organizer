@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Recipe — Diet Recipes</title>
-  <link rel="stylesheet" href="css/styles.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body>
   <header class="site-header">
@@ -35,6 +35,21 @@
         <h3>Initial seed</h3>
         <p id="seed-status">Checking the collection…</p>
         <button type="button" id="seed-btn" class="btn btn--primary">Seed initial recipes</button>
+      </div>
+
+      <div id="import-wrap" class="callout" hidden>
+        <h3>Import missing recipes</h3>
+        <p class="muted">
+          Compares <code>data/seed-recipes.json</code> against the live collection and adds only
+          what's missing, matched on URL or name. Existing recipes are never modified, so this is
+          safe to run as often as you like.
+        </p>
+        <p id="import-status">Not checked yet.</p>
+        <ul id="import-list" class="import-list" hidden></ul>
+        <div class="import-actions">
+          <button type="button" id="import-check-btn" class="btn btn--secondary">Check for new recipes</button>
+          <button type="button" id="import-confirm-btn" class="btn btn--primary" hidden>Import</button>
+        </div>
       </div>
 
       <form id="recipe-form" class="recipe-form" novalidate>

@@ -66,6 +66,28 @@
     "nutrients": ["Protein", "Complex carbs", "Calcium", "Magnesium", "Vitamin C", "Unsaturated fats", "Anti-inflammatory spices", "Lots of vegetables"]
   },
   {
+    "name": "Asian Chicken Lettuce Wraps",
+    "url": "https://www.simplejoy.com/chicken-lettuce-wraps/",
+    "source": "Simple Joy",
+    "cuisine": "Asian",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 25,
+    "notes": "Ground chicken with ginger, garlic, and water chestnuts in a hoisin-soy sauce, spooned into Bibb or Boston lettuce cups. Serve brown rice alongside for the complex carbs. Leave out the chili paste — not needed for flavor. Kids like assembling their own.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Korean Ground Turkey Rice Bowls",
+    "url": "https://kaynutrition.com/korean-ground-turkey-rice-bowls/",
+    "source": "Stephanie Kay Nutrition",
+    "cuisine": "Asian",
+    "protein": "turkey",
+    "dietaryTags": [],
+    "timeMinutes": 20,
+    "notes": "Ground turkey in a sweet-savory gochujang glaze over rice, with shredded carrots and quick-sliced cucumber. Use brown rice. Gochujang is a chili paste — start with 1 tablespoon instead of 2 and taste before adding more.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Lots of vegetables"]
+  },
+  {
     "name": "Easy Chicken Fajitas",
     "url": "https://www.spendwithpennies.com/easy-chicken-fajitas/",
     "source": "Spend With Pennies",
@@ -119,6 +141,17 @@
     "timeMinutes": 30,
     "notes": "Eggs poached in a spiced tomato and bell pepper sauce. Serve with whole grain pita or crusty bread for dipping. Great \"breakfast for dinner\" alternative to frittata, with bolder North African/Middle Eastern spicing.",
     "nutrients": ["Protein", "Folic acid", "Vitamin D", "Vitamin B12", "Vitamin C", "Vitamin E", "Magnesium", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Turkey Kofta Kebabs with Tahini Sauce",
+    "url": "https://www.acedarspoon.com/turkey-kofta-kebab-recipe/",
+    "source": "A Cedar Spoon",
+    "cuisine": "Middle Eastern",
+    "protein": "turkey",
+    "dietaryTags": [],
+    "timeMinutes": 35,
+    "notes": "Ground turkey with parsley, mint, cumin, coriander, and cinnamon, formed on skewers and broiled or grilled, with a lemon-tahini sauce. Serve with whole grain pita and a cucumber-tomato salad. Omit the red pepper flakes. No chilling step needed. Skip the hummus side.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Zinc", "Selenium", "Magnesium", "Calcium", "Unsaturated fats", "Anti-inflammatory spices", "Lots of vegetables"]
   },
   {
     "name": "Spinach Frittata",
@@ -196,5 +229,16 @@
     "timeMinutes": 30,
     "notes": "Greek-marinated chicken over turmeric rice (or quinoa) with cucumber, tomatoes, red onion, feta, and homemade tzatziki. No marinade time needed. Skip chickpea variation and avocado.",
     "nutrients": ["Protein", "Complex carbs", "Myo-inositol", "Vitamin C", "Vitamin B12", "Calcium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
+  },
+  {
+    "name": "Greek Chicken Souvlaki",
+    "url": "https://downshiftology.com/recipes/greek-chicken-souvlaki/",
+    "source": "Downshiftology",
+    "cuisine": "Mediterranean / Greek",
+    "protein": "chicken",
+    "dietaryTags": [],
+    "timeMinutes": 38,
+    "notes": "Chicken breast marinated in olive oil, lemon, garlic, and oregano, then skewered and cooked 8 minutes on a grill pan. Most of the time is hands-off marinating. Serve with tzatziki, a chopped Greek salad, and whole grain pita or brown rice.",
+    "nutrients": ["Protein", "Complex carbs", "Vitamin C", "Vitamin B12", "Calcium", "Zinc", "Selenium", "Unsaturated fats", "Lots of vegetables"]
   }
 ]

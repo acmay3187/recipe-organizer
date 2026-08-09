@@ -87,6 +87,7 @@ The seed button is idempotent: it refuses to run if the collection is not empty.
 
 - **Browse**: open the site, filter or search.
 - **Add a recipe**: click **+ Add recipe** (visible only when signed in as owner), fill the form, submit.
+- **Import recipes added to the JSON file**: on the Add page, the owner-only **Import missing recipes** panel diffs `data/seed-recipes.json` against the live collection and writes only what's absent. Click **Check for new recipes** to preview the list, then confirm. Recipes are matched on URL or name (case- and trailing-slash-insensitive), existing documents are never modified, and re-running it is a no-op — so it's safe to use whenever new entries are appended to the JSON.
 - **Edit/delete**: each recipe card shows Edit/Delete buttons when you're signed in.
 - **Cross-device**: changes propagate live via Firestore's `onSnapshot` — no refresh needed.
 
@@ -141,8 +142,9 @@ js/
   render.js             # Recipe card rendering
   app.js                # index.html glue
   add-form.js           # add.html glue
-  seed.js               # One-time seed button
+  seed.js               # One-time seed button + "import missing recipes" panel
+  recipe-diff.js        # Pure matching logic for the import (no Firestore deps)
   constants.js          # Cuisine / protein / nutrient lists
 data/
-  seed-recipes.json     # 18 starter recipes
+  seed-recipes.json     # Starter recipes; also the source for the import panel
 ```

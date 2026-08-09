@@ -11,6 +11,7 @@ import {
   writeBatch
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 import { db } from "./firebase-init.js";
+import { diffRecipes } from "./recipe-diff.js";
 
 const RECIPES = "recipes";
 
@@ -57,6 +58,33 @@ export async function deleteRecipe(id) {
 export async function countRecipes() {
   const snap = await getDocs(collection(db, RECIPES));
   return snap.size;
+}
+
+// Dry run: which of `recipes` are not yet in Firestore? Does not write anything.
+export async function findMissingRecipes(recipes) {
+  const snap = await getDocs(collection(db, RECIPES));
+  const existing = snap.docs.map((d) => d.data());
+  const { missing, present } = diffRecipes(existing, recipes);
+  return { missing, present, existingCount: snap.size };
+}
+
+// Writes only the recipes that are absent. Re-runs the diff itself rather than
+// trusting a caller-supplied list, so a stale preview can't write a duplicate.
+export async function importMissingRecipes(recipes) {
+  const { missing, present } = await findMissingRecipes(recipes);
+  if (missing.length === 0) return { added: 0, skipped: present.length };
+
+  const batch = writeBatch(db);
+  for (const r of missing) {
+    const ref = doc(collection(db, RECIPES));
+    batch.set(ref, {
+      ...r,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    });
+  }
+  await batch.commit();
+  return { added: missing.length, skipped: present.length };
 }
 
 export async function seedRecipes(recipes) {
