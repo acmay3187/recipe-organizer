@@ -9,6 +9,13 @@ export function matchKeys(r) {
   return { url, name };
 }
 
+// Stable identity for a recipe within a single import session — used to tie a
+// checkbox in the preview back to the recipe it represents.
+export function keyOf(r) {
+  const { url, name } = matchKeys(r);
+  return url || name;
+}
+
 // Splits `candidates` into the ones absent from `existing` and the ones already there.
 // Duplicates *within* candidates collapse too, so a repeated entry in the JSON file
 // is only written once.

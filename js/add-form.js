@@ -1,7 +1,7 @@
 import { CUISINES, PROTEINS, DIETARY_TAGS, NUTRIENTS } from "./constants.js";
 import { addRecipe, updateRecipe, getRecipe } from "./recipes.js";
 import { onAuthChange, wireAuthButtons } from "./auth.js";
-import { wireSeedButton, wireImportButton } from "./seed.js";
+import { wireSeedButton, wireImportButton, wireExportButton } from "./seed.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const editId = urlParams.get("id");
@@ -189,6 +189,7 @@ async function init() {
   wireForm();
   wireSeedButton();
   wireImportButton();
+  wireExportButton();
 
   wireAuthButtons({
     signInBtnId: "sign-in-btn",

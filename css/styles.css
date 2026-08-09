@@ -391,12 +391,21 @@ h1, h2, h3, h4 { font-family: Georgia, "Times New Roman", serif; color: #1f1f1f;
 
 .import-list {
   margin: 8px 0 12px;
-  padding-left: 20px;
+  padding-left: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 .import-list li { line-height: 1.4; }
+
+.import-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+.import-item input { margin-top: 4px; flex: none; }
 
 .import-actions {
   display: flex;

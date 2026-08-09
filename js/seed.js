@@ -1,4 +1,5 @@
-import { countRecipes, seedRecipes, findMissingRecipes, importMissingRecipes } from "./recipes.js";
+import { countRecipes, seedRecipes, findMissingRecipes, importMissingRecipes, exportRecipes } from "./recipes.js";
+import { keyOf } from "./recipe-diff.js";
 import { onAuthChange } from "./auth.js";
 
 async function loadSeedFile() {
@@ -23,6 +24,8 @@ async function refreshSeedVisibility() {
     // once seeding is done.
     const importWrap = document.getElementById("import-wrap");
     if (importWrap) importWrap.hidden = count === 0;
+    const exportWrap = document.getElementById("export-wrap");
+    if (exportWrap) exportWrap.hidden = count === 0;
   } catch (err) {
     console.warn("Could not read collection count:", err);
   }
@@ -54,6 +57,44 @@ export function wireSeedButton() {
   });
 }
 
+// Owner-only export: downloads the live collection in seed-recipes.json's exact shape.
+// This is the only way the JSON file can be brought back in line with Firestore — a
+// static page can't write to the repo — so deletions and hand-added recipes only reach
+// version control by downloading this and committing it.
+export function wireExportButton() {
+  const btn = document.getElementById("export-btn");
+  if (!btn) return;
+  const status = document.getElementById("export-status");
+
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    if (status) status.textContent = "Building export…";
+    let url;
+    try {
+      const rows = await exportRecipes();
+      const json = JSON.stringify(rows, null, 2) + "\n";
+      const blob = new Blob([json], { type: "application/json" });
+      url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "seed-recipes.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      if (status) {
+        status.textContent = `Downloaded ${rows.length} recipes. Replace data/seed-recipes.json in the repo with this file and commit it.`;
+      }
+    } catch (err) {
+      console.error(err);
+      if (status) status.textContent = "Export failed: " + (err.message || err.code);
+    } finally {
+      // Revoking immediately can cancel the download in some browsers; give it a beat.
+      if (url) setTimeout(() => URL.revokeObjectURL(url), 10000);
+      btn.disabled = false;
+    }
+  });
+}
+
 // Owner-only "import missing recipes": diffs data/seed-recipes.json against the
 // live collection and writes just the ones that aren't there yet. Unlike the seed
 // button this is safe to run repeatedly — it never touches existing documents.
@@ -64,9 +105,23 @@ export function wireImportButton() {
 
   const status = document.getElementById("import-status");
   const list = document.getElementById("import-list");
+  const toggleBtn = document.getElementById("import-toggle-btn");
 
   function setStatus(text) {
     if (status) status.textContent = text;
+  }
+
+  function selectedKeys() {
+    return new Set(
+      Array.from(list?.querySelectorAll("input[type=checkbox]:checked") || [])
+        .map((cb) => cb.value)
+    );
+  }
+
+  function syncConfirmButton() {
+    const n = selectedKeys().size;
+    confirmBtn.textContent = `Add ${n} recipe${n === 1 ? "" : "s"}`;
+    confirmBtn.disabled = n === 0;
   }
 
   function renderList(recipes) {
@@ -74,15 +129,32 @@ export function wireImportButton() {
     list.innerHTML = "";
     for (const r of recipes) {
       const li = document.createElement("li");
-      li.textContent = r.name;
-      const meta = document.createElement("span");
-      meta.className = "muted";
+      const label = document.createElement("label");
+      label.className = "import-item";
+
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.value = keyOf(r);
+      cb.checked = true;
+      cb.addEventListener("change", syncConfirmButton);
+      label.appendChild(cb);
+
+      const text = document.createElement("span");
+      text.textContent = r.name;
       const bits = [r.cuisine, r.timeMinutes ? `${r.timeMinutes} min` : null].filter(Boolean);
-      meta.textContent = bits.length ? ` — ${bits.join(", ")}` : "";
-      li.appendChild(meta);
+      if (bits.length) {
+        const meta = document.createElement("span");
+        meta.className = "muted";
+        meta.textContent = ` — ${bits.join(", ")}`;
+        text.appendChild(meta);
+      }
+      label.appendChild(text);
+
+      li.appendChild(label);
       list.appendChild(li);
     }
     list.hidden = recipes.length === 0;
+    if (toggleBtn) toggleBtn.hidden = recipes.length === 0;
   }
 
   checkBtn.addEventListener("click", async () => {
@@ -96,9 +168,9 @@ export function wireImportButton() {
       if (missing.length === 0) {
         setStatus(`Nothing to import — all ${recipes.length} recipes in the file are already in the collection (${existingCount} total).`);
       } else {
-        setStatus(`${missing.length} recipe(s) in the file are not in the collection yet:`);
-        confirmBtn.textContent = `Add ${missing.length} recipe${missing.length === 1 ? "" : "s"}`;
+        setStatus(`${missing.length} recipe(s) in the file are not in the collection. Untick anything you deleted on purpose — only ticked recipes are added.`);
         confirmBtn.hidden = false;
+        syncConfirmButton();
       }
     } catch (err) {
       console.error(err);
@@ -108,20 +180,34 @@ export function wireImportButton() {
     }
   });
 
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const boxes = Array.from(list?.querySelectorAll("input[type=checkbox]") || []);
+      const allOn = boxes.every((cb) => cb.checked);
+      boxes.forEach((cb) => { cb.checked = !allOn; });
+      toggleBtn.textContent = allOn ? "Select all" : "Select none";
+      syncConfirmButton();
+    });
+  }
+
   confirmBtn.addEventListener("click", async () => {
+    const chosen = selectedKeys();
+    if (chosen.size === 0) return;
     confirmBtn.disabled = true;
     checkBtn.disabled = true;
     setStatus("Importing…");
     try {
       const recipes = await loadSeedFile();
-      const { added, skipped } = await importMissingRecipes(recipes);
+      const { added, skipped, declined } = await importMissingRecipes(recipes, chosen);
       renderList([]);
       confirmBtn.hidden = true;
       if (added === 0) {
         setStatus(`Nothing imported — all ${skipped} recipes were already present.`);
       } else {
-        setStatus(`Imported ${added} recipe(s), skipped ${skipped} already present. Redirecting…`);
-        setTimeout(() => { window.location.href = "index.html"; }, 1000);
+        const parts = [`Imported ${added} recipe(s)`, `skipped ${skipped} already present`];
+        if (declined > 0) parts.push(`left out ${declined} you unticked`);
+        setStatus(parts.join(", ") + ". Redirecting…");
+        setTimeout(() => { window.location.href = "index.html"; }, 1200);
       }
     } catch (err) {
       console.error(err);

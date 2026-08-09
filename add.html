@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Recipe — Diet Recipes</title>
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
   <header class="site-header">
@@ -37,17 +37,31 @@
         <button type="button" id="seed-btn" class="btn btn--primary">Seed initial recipes</button>
       </div>
 
+      <div id="export-wrap" class="callout" hidden>
+        <h3>Export collection</h3>
+        <p class="muted">
+          Downloads every recipe currently in Firestore as a <code>seed-recipes.json</code> file.
+          Replace <code>data/seed-recipes.json</code> in the repo with it and commit — that's what
+          keeps the file in step with recipes you've added or deleted on the site, and it doubles
+          as a backup. Nothing on the site changes.
+        </p>
+        <p id="export-status">&nbsp;</p>
+        <button type="button" id="export-btn" class="btn btn--secondary">Download seed-recipes.json</button>
+      </div>
+
       <div id="import-wrap" class="callout" hidden>
         <h3>Import missing recipes</h3>
         <p class="muted">
           Compares <code>data/seed-recipes.json</code> against the live collection and adds only
           what's missing, matched on URL or name. Existing recipes are never modified, so this is
-          safe to run as often as you like.
+          safe to run as often as you like. Anything you deleted on purpose will show up here —
+          untick it, or export first so the file stops listing it.
         </p>
         <p id="import-status">Not checked yet.</p>
         <ul id="import-list" class="import-list" hidden></ul>
         <div class="import-actions">
           <button type="button" id="import-check-btn" class="btn btn--secondary">Check for new recipes</button>
+          <button type="button" id="import-toggle-btn" class="btn btn--ghost" hidden>Select none</button>
           <button type="button" id="import-confirm-btn" class="btn btn--primary" hidden>Import</button>
         </div>
       </div>

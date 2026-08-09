@@ -87,7 +87,15 @@ The seed button is idempotent: it refuses to run if the collection is not empty.
 
 - **Browse**: open the site, filter or search.
 - **Add a recipe**: click **+ Add recipe** (visible only when signed in as owner), fill the form, submit.
-- **Import recipes added to the JSON file**: on the Add page, the owner-only **Import missing recipes** panel diffs `data/seed-recipes.json` against the live collection and writes only what's absent. Click **Check for new recipes** to preview the list, then confirm. Recipes are matched on URL or name (case- and trailing-slash-insensitive), existing documents are never modified, and re-running it is a no-op — so it's safe to use whenever new entries are appended to the JSON.
+- **Import recipes added to the JSON file**: on the Add page, the owner-only **Import missing recipes** panel diffs `data/seed-recipes.json` against the live collection and writes only what's absent. Click **Check for new recipes** to preview the list, untick anything you don't want, then confirm. Recipes are matched on URL or name (case- and trailing-slash-insensitive), existing documents are never modified, and re-running it is a no-op.
+- **Export the collection back to the repo**: the **Export collection** panel downloads the live collection as a `seed-recipes.json` file in the same schema (no ids or timestamps, sorted by cuisine then name). Replace `data/seed-recipes.json` with it and commit.
+
+### Keeping the JSON and Firestore in sync
+
+Firestore is the source of truth; `data/seed-recipes.json` is a mirror kept in version control. Nothing syncs automatically — a static page can't write to the repo — so:
+
+- **Added or deleted recipes on the site?** Export and commit the file. Until you do, deleted recipes keep showing up in the import preview as "missing" (untick them), and hand-added recipes exist only in Firestore with no backup.
+- **Added recipes to the JSON by hand?** Import them.
 - **Edit/delete**: each recipe card shows Edit/Delete buttons when you're signed in.
 - **Cross-device**: changes propagate live via Firestore's `onSnapshot` — no refresh needed.
 
@@ -142,7 +150,7 @@ js/
   render.js             # Recipe card rendering
   app.js                # index.html glue
   add-form.js           # add.html glue
-  seed.js               # One-time seed button + "import missing recipes" panel
+  seed.js               # Seed / import / export panels on the Add page
   recipe-diff.js        # Pure matching logic for the import (no Firestore deps)
   constants.js          # Cuisine / protein / nutrient lists
 data/
