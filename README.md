@@ -111,11 +111,20 @@ Firestore is the source of truth; `data/seed-recipes.json` is a mirror kept in v
   dietaryTags: string[],                // ["vegetarian"], ["vegetarian","vegan"], or []
   timeMinutes: number,
   notes: string,
+  ingredients: string,                  // optional; pasted list, drives nutrient suggestions
   nutrients: string[],                  // see js/constants.js for the canonical list
   createdAt: Timestamp,
   updatedAt: Timestamp
 }
 ```
+
+### Nutrient suggestions
+
+Pasting an ingredient list into the **Ingredients** field on the add/edit form pre-ticks nutrient chips. `js/nutrient-suggest.js` holds a keyword table derived from the *Key nutrients & sources* table on `guidelines.html` — **if that page changes, update the table to match.**
+
+Two tiers: strong matches (walnuts → Omega-3s) are ticked automatically; weak ones (plain `pasta` → Complex carbs, which depends on whether you buy whole wheat) are listed for review but never ticked. Each suggestion shows the ingredient that triggered it.
+
+Suggestions only ever *add* ticks — they never untick, and a chip you switch off by hand stays off for the rest of that edit. It matches on presence, not quantity, so it can't tell whether there's enough of something to matter. Treat it as a first pass, not an authority.
 
 The **"Main ingredient / diet"** sidebar filter combines `protein` and `dietaryTags` — a recipe matches the "Vegetarian" chip if it has a vegetarian/vegan tag **or** has `protein` in `{eggs, tofu}`.
 
@@ -152,6 +161,7 @@ js/
   add-form.js           # add.html glue
   seed.js               # Seed / import / export panels on the Add page
   recipe-diff.js        # Pure matching logic for the import (no Firestore deps)
+  nutrient-suggest.js   # Ingredient keyword -> nutrient tag matcher
   constants.js          # Cuisine / protein / nutrient lists
 data/
   seed-recipes.json     # Starter recipes; also the source for the import panel

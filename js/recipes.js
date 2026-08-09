@@ -108,6 +108,7 @@ export async function exportRecipes() {
       dietaryTags: rest.dietaryTags || [],
       timeMinutes: rest.timeMinutes ?? null,
       notes: rest.notes || "",
+      ingredients: rest.ingredients || "",
       nutrients: rest.nutrients || []
     };
   });

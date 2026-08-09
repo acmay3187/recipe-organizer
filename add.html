@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Recipe — Diet Recipes</title>
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
   <header class="site-header">
@@ -101,7 +101,18 @@
         </div>
 
         <div class="form-row">
+          <label for="recipe-ingredients">Ingredients</label>
+          <textarea id="recipe-ingredients" name="ingredients" rows="6"
+                    placeholder="Paste the ingredient list from the recipe page — nutrient tags below are suggested from it."></textarea>
+          <p class="muted form-hint">
+            Optional, and also searchable. Suggestions follow the
+            <a href="guidelines.html#nutrients">nutrient sources</a> on the guidelines page.
+          </p>
+        </div>
+
+        <div class="form-row">
           <span class="form-label">Nutrients covered</span>
+          <div id="nutrient-suggestions" class="suggestions" hidden></div>
           <div id="nutrient-chips" class="chip-row chip-row--form"></div>
         </div>
 

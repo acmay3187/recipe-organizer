@@ -424,6 +424,20 @@ h1, h2, h3, h4 { font-family: Georgia, "Times New Roman", serif; color: #1f1f1f;
   gap: 8px;
 }
 
+.form-hint { margin: 2px 0 0; font-size: 0.85rem; }
+
+.suggestions {
+  background: var(--chip-bg);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+.suggestions__line { margin: 0 0 4px; line-height: 1.5; }
+.suggestions__line:last-child { margin-bottom: 0; }
+.suggestions__line--weak { color: var(--text-muted); }
+.suggestions__item { font-weight: 500; }
+
 .recipe-form {
   background: var(--surface);
   border: 1px solid var(--border);

@@ -1,4 +1,5 @@
 import { CUISINES, PROTEINS, DIETARY_TAGS, NUTRIENTS } from "./constants.js";
+import { suggestNutrients } from "./nutrient-suggest.js";
 import { addRecipe, updateRecipe, getRecipe } from "./recipes.js";
 import { onAuthChange, wireAuthButtons } from "./auth.js";
 import { wireSeedButton, wireImportButton, wireExportButton } from "./seed.js";
@@ -64,6 +65,17 @@ function buildDietaryCheckboxes(container) {
   }
 }
 
+// Nutrients the user has switched off by hand. The suggester must not fight them by
+// re-ticking on the next keystroke.
+const userCleared = new Set();
+
+function setChip(nutrient, on) {
+  const chip = document.querySelector(`#nutrient-chips .chip[data-nutrient="${cssEscape(nutrient)}"]`);
+  if (!chip) return;
+  chip.classList.toggle("chip--active", on);
+  chip.setAttribute("aria-pressed", on ? "true" : "false");
+}
+
 function buildNutrientChips(container) {
   container.innerHTML = "";
   for (const n of NUTRIENTS) {
@@ -76,9 +88,71 @@ function buildNutrientChips(container) {
     btn.addEventListener("click", () => {
       const active = btn.classList.toggle("chip--active");
       btn.setAttribute("aria-pressed", active ? "true" : "false");
+      if (active) userCleared.delete(n); else userCleared.add(n);
     });
     container.appendChild(btn);
   }
+}
+
+function renderSuggestions({ strong, weak }) {
+  const box = document.getElementById("nutrient-suggestions");
+  if (!box) return;
+  box.innerHTML = "";
+
+  const ticked = strong.filter((s) => !userCleared.has(s.nutrient));
+  if (ticked.length === 0 && weak.length === 0) {
+    box.hidden = true;
+    return;
+  }
+
+  const line = (label, items, cls) => {
+    if (items.length === 0) return;
+    const p = document.createElement("p");
+    p.className = `suggestions__line ${cls}`;
+    const strongEl = document.createElement("strong");
+    strongEl.textContent = label + " ";
+    p.appendChild(strongEl);
+    items.forEach((s, i) => {
+      if (i > 0) p.appendChild(document.createTextNode(", "));
+      const span = document.createElement("span");
+      span.textContent = s.nutrient;
+      span.title = `matched: ${s.because.join(", ")}`;
+      span.className = "suggestions__item";
+      p.appendChild(span);
+      const why = document.createElement("span");
+      why.className = "muted";
+      why.textContent = ` (${s.because.slice(0, 3).join(", ")})`;
+      p.appendChild(why);
+    });
+    box.appendChild(p);
+  };
+
+  line("Ticked from ingredients:", ticked, "suggestions__line--strong");
+  line("Worth a look — depends on what you use:", weak, "suggestions__line--weak");
+  box.hidden = false;
+}
+
+function wireIngredientSuggestions() {
+  const field = document.getElementById("recipe-ingredients");
+  if (!field) return;
+
+  let timer;
+  function run() {
+    const result = suggestNutrients(field.value);
+    // Only ever add ticks. Never untick — the user's own choices win, and weak
+    // matches are shown but never applied.
+    for (const s of result.strong) {
+      if (!userCleared.has(s.nutrient)) setChip(s.nutrient, true);
+    }
+    renderSuggestions(result);
+  }
+
+  field.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(run, 300);
+  });
+  // Pasting is the common path — react without waiting out the debounce.
+  field.addEventListener("paste", () => setTimeout(run, 0));
 }
 
 function readForm() {
@@ -110,6 +184,7 @@ function readForm() {
     dietaryTags,
     timeMinutes: Number.isFinite(timeMinutes) ? timeMinutes : null,
     notes: (form.elements["notes"].value || "").trim(),
+    ingredients: (form.elements["ingredients"].value || "").trim(),
     nutrients
   };
 }
@@ -134,6 +209,7 @@ function populateForm(r) {
   }
   form.elements["timeMinutes"].value = r.timeMinutes ?? "";
   form.elements["notes"].value = r.notes || "";
+  form.elements["ingredients"].value = r.ingredients || "";
   for (const n of (r.nutrients || [])) {
     const chip = document.querySelector(`#nutrient-chips .chip[data-nutrient="${cssEscape(n)}"]`);
     if (chip) {
@@ -187,6 +263,7 @@ async function init() {
   buildDietaryCheckboxes(document.getElementById("dietary-checks"));
   buildNutrientChips(document.getElementById("nutrient-chips"));
   wireForm();
+  wireIngredientSuggestions();
   wireSeedButton();
   wireImportButton();
   wireExportButton();

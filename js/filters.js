@@ -45,6 +45,7 @@ export function applyFilters(recipes, state) {
         r.cuisine,
         r.source,
         r.notes,
+        r.ingredients,
         (r.nutrients || []).join(" ")
       ].join(" ").toLowerCase();
       if (!hay.includes(q)) return false;
