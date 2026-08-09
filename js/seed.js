@@ -24,8 +24,6 @@ async function refreshSeedVisibility() {
     // once seeding is done.
     const importWrap = document.getElementById("import-wrap");
     if (importWrap) importWrap.hidden = count === 0;
-    const exportWrap = document.getElementById("export-wrap");
-    if (exportWrap) exportWrap.hidden = count === 0;
   } catch (err) {
     console.warn("Could not read collection count:", err);
   }
@@ -61,14 +59,28 @@ export function wireSeedButton() {
 // This is the only way the JSON file can be brought back in line with Firestore — a
 // static page can't write to the repo — so deletions and hand-added recipes only reach
 // version control by downloading this and committing it.
+//
+// Lives in the header nav, so there's no room for a status line: progress and result
+// are reported through the button's own label, which reverts after a moment.
 export function wireExportButton() {
   const btn = document.getElementById("export-btn");
   if (!btn) return;
-  const status = document.getElementById("export-status");
+
+  const idleLabel = btn.textContent;
+  let revertTimer;
+
+  function flash(label, ms = 4000) {
+    btn.textContent = label;
+    clearTimeout(revertTimer);
+    revertTimer = setTimeout(() => { btn.textContent = idleLabel; }, ms);
+  }
+
+  onAuthChange(({ isOwner }) => { btn.hidden = !isOwner; });
 
   btn.addEventListener("click", async () => {
     btn.disabled = true;
-    if (status) status.textContent = "Building export…";
+    clearTimeout(revertTimer);
+    btn.textContent = "Exporting…";
     let url;
     try {
       const rows = await exportRecipes();
@@ -81,12 +93,11 @@ export function wireExportButton() {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      if (status) {
-        status.textContent = `Downloaded ${rows.length} recipes. Replace data/seed-recipes.json in the repo with this file and commit it.`;
-      }
+      flash(`Saved ${rows.length} ✓`);
     } catch (err) {
       console.error(err);
-      if (status) status.textContent = "Export failed: " + (err.message || err.code);
+      flash("Export failed", 6000);
+      alert("Export failed: " + (err.message || err.code));
     } finally {
       // Revoking immediately can cancel the download in some browsers; give it a beat.
       if (url) setTimeout(() => URL.revokeObjectURL(url), 10000);

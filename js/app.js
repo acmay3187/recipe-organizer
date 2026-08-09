@@ -7,6 +7,7 @@ import {
   NUTRIENTS
 } from "./constants.js";
 import { wireAuthButtons, onAuthChange } from "./auth.js";
+import { wireExportButton } from "./seed.js";
 
 const state = createFilterState();
 let allRecipes = [];
@@ -123,6 +124,7 @@ function wireAuthUI() {
 function init() {
   wireFilters();
   wireAuthUI();
+  wireExportButton();
   subscribeRecipes(
     (recipes) => {
       allRecipes = recipes;

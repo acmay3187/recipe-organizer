@@ -88,7 +88,7 @@ The seed button is idempotent: it refuses to run if the collection is not empty.
 - **Browse**: open the site, filter or search.
 - **Add a recipe**: click **+ Add recipe** (visible only when signed in as owner), fill the form, submit.
 - **Import recipes added to the JSON file**: on the Add page, the owner-only **Import missing recipes** panel diffs `data/seed-recipes.json` against the live collection and writes only what's absent. Click **Check for new recipes** to preview the list, untick anything you don't want, then confirm. Recipes are matched on URL or name (case- and trailing-slash-insensitive), existing documents are never modified, and re-running it is a no-op.
-- **Export the collection back to the repo**: the **Export collection** panel downloads the live collection as a `seed-recipes.json` file in the same schema (no ids or timestamps, sorted by cuisine then name). Replace `data/seed-recipes.json` with it and commit.
+- **Export the collection back to the repo**: the **Export** button in the header (owner-only, next to *Add recipe*, on both the Recipes and Add pages) downloads the live collection as a `seed-recipes.json` file in the same schema (no ids or timestamps, sorted by cuisine then name). Replace `data/seed-recipes.json` with it and commit. Progress and result show in the button's own label.
 
 ### Keeping the JSON and Firestore in sync
 

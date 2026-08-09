@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Recipe — Diet Recipes</title>
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
   <header class="site-header">
@@ -14,6 +14,8 @@
         <a href="index.html" class="nav-link">Recipes</a>
         <a href="guidelines.html" class="nav-link">Guidelines</a>
         <a href="add.html" class="nav-link nav-link--active">Add recipe</a>
+        <button type="button" id="export-btn" class="nav-link nav-link--btn" hidden
+                title="Download the live collection as seed-recipes.json to commit to the repo">Export</button>
       </nav>
       <div class="auth-controls">
         <span id="user-label" class="user-label" hidden></span>
@@ -35,18 +37,6 @@
         <h3>Initial seed</h3>
         <p id="seed-status">Checking the collection…</p>
         <button type="button" id="seed-btn" class="btn btn--primary">Seed initial recipes</button>
-      </div>
-
-      <div id="export-wrap" class="callout" hidden>
-        <h3>Export collection</h3>
-        <p class="muted">
-          Downloads every recipe currently in Firestore as a <code>seed-recipes.json</code> file.
-          Replace <code>data/seed-recipes.json</code> in the repo with it and commit — that's what
-          keeps the file in step with recipes you've added or deleted on the site, and it doubles
-          as a backup. Nothing on the site changes.
-        </p>
-        <p id="export-status">&nbsp;</p>
-        <button type="button" id="export-btn" class="btn btn--secondary">Download seed-recipes.json</button>
       </div>
 
       <div id="import-wrap" class="callout" hidden>
