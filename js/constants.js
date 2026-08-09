@@ -3,6 +3,7 @@ export const CUISINES = [
   "Tex-Mex / Mexican",
   "Middle Eastern",
   "Italian / American",
+  "American",
   "Indian",
   "Mediterranean / Greek"
 ];
