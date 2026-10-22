@@ -7,6 +7,16 @@ const proteinLabel = (key) => {
   return found ? found.label : key;
 };
 
+// Only http(s) links; anything else (e.g. javascript:) would run code on click.
+const safeUrl = (url) => {
+  try {
+    const { protocol } = new URL(url);
+    return protocol === "http:" || protocol === "https:" ? url : "#";
+  } catch {
+    return "#";
+  }
+};
+
 export function renderGrid(container, recipes, { onAfterDelete } = {}) {
   container.innerHTML = "";
 
@@ -35,7 +45,7 @@ function renderCard(r, isOwner, onAfterDelete) {
   const title = document.createElement("h3");
   title.className = "recipe-card__title";
   const link = document.createElement("a");
-  link.href = r.url || "#";
+  link.href = safeUrl(r.url);
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   link.textContent = r.name || "(untitled)";
