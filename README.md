@@ -35,7 +35,8 @@ service cloud.firestore {
     match /recipes/{id} {
       allow read: if true;
       allow write: if request.auth != null
-        && request.auth.token.email == "alexander.c.mayer@gmail.com";
+        && request.auth.token.email == "alexander.c.mayer@gmail.com"
+        && request.auth.token.email_verified == true;
     }
   }
 }
